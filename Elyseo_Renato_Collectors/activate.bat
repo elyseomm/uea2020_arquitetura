@@ -1,0 +1,2 @@
+@ECHO OFF
+.\Scripts\activate
