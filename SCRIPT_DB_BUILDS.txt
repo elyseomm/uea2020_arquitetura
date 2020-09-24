@@ -1,0 +1,42 @@
+
+CREATE TABLE `builds` (
+  `id` int NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `type` int DEFAULT NULL COMMENT '1 - monofaseco / 2 - bifaseco /  3 - trifasico',
+  `dtcreate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `active` int DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+---------------------------------------
+
+1 Minha Casa  2 2020-09-23 19:48:03 1
+2 Casa Renato 1 2020-09-23 19:48:19 1
+        
+							
+------------------------------------------------------------------------------------
+
+CREATE TABLE `user` (
+  `id` int NOT NULL,
+  `iduser` int NOT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `cpf` varchar(45) DEFAULT NULL,
+  `lastupd` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+-------------------------------------
+
+1 1 Elyseo Mesquita 65985847412 2020-09-23 19:50:49
+        
+------------------------------------------------------------------------------------
+
+CREATE TABLE `user_builds` (
+  `iduser` int NOT NULL,
+  `idbuild` int NOT NULL,
+  `active` int DEFAULT '1',
+  PRIMARY KEY (`iduser`,`idbuild`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+-------------------------------------
+
+1 1 1
+    
