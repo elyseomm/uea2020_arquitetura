@@ -1,0 +1,22 @@
+// Subir o container do mysql no windows
+docker container run -d -p 3306:3306 --name mysql -e MYSQL_DB=docker -e MYSQL_ROOT_PASSWORD=root mysql;
+
+------------------------------------------------------------------------------
+
+USERS:
+CREATE TABLE `users` (
+  `id` int NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `dtnasc` datetime DEFAULT NULL,
+  `cpf` varchar(45) DEFAULT NULL,
+  `celular` varchar(45) DEFAULT NULL,
+  `login` varchar(45) DEFAULT NULL,
+  `pws` varchar(45) DEFAULT NULL,
+  `active` int DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+# id, name, dtnasc, cpf, celular, login, pws, active
+'1', 'Elyseo Mesquita', '1980-02-25 00:00:00', '65985874123', '92982041339', 'emm', '123', '1'
+'2', 'Renato', NULL, NULL, NULL, 'renato', '123', '1'
+'3', 'Professor Palheta', NULL, NULL, NULL, 'prof', '123', '1'
