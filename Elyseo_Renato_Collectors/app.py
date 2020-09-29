@@ -69,7 +69,7 @@ def next_id(table):
 
 @app.route('/collector/<id>', methods=['GET'])
 def collector(id):    
-    SQL = "select * from sys.collectors where id=%s and active = 1" % id 
+    SQL = "select * from sys.collectors where id=%s and active=1" % id 
     #print(SQL)
     user = json.loads(execsqlone(SQL))      
     #return str(user)
@@ -83,8 +83,57 @@ def collector(id):
 @app.route('/allcollectors', methods=['GET'])
 def allcollectors():
     SQL = "select * from sys.collectors"
-    return execsql(SQL)
+    return execsqlall(SQL)
 
+@app.route('/collector/', methods=['POST'])
+def insert():
+    if (request.data):
+        params = json.loads(request.data)
+        print(params)
+        name = params['name']
+        type = params['type']
+        ip = params['ip']
+        port = params['port']
+        active = int(params['active'])
+
+        SQL = """insert into sys.collectors (id, name, type, ip, port, active)
+        values(%s, '%s', '%s', now() ) """ % (next_id("collectors"), name, type, ip, port, active)
+        return execsql(SQL)
+
+    return "nops"
+
+@app.route('/collector/', methods=['PUT'])
+def update():
+    if (request.data):
+        params = json.loads(request.data)
+        print(params)
+        id = int(params['id'])
+        name = params['name']
+        type = params['type']
+        ip = params['ip']
+        port = params['port']
+        active = int(params['active'])
+
+        SQL = """update sys.collectors set 
+        name = '%s',
+        type = '%s',
+        ip = '%s',
+        port = '%s',
+        active = %s
+        where id=%s """ % ( name, type, ip, port, active, id)
+        return execsql(SQL)
+
+    return "nops"
+
+@app.route('/collector/<id>', methods=['DELETE'])
+def delete(id):
+    if (id):
+        SQL = "delete from sys.collectors where id=%s" % id
+        return execsql(SQL)
+    return "nops"
+
+
+#---------------------------------------------------------------------
 if  __name__ == '__main__':
     # app.run()
     app.run(port=app_port)
